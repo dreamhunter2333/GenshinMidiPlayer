@@ -29,12 +29,17 @@ _logger.addHandler(ch)
 
 
 def get_tempo(mid: mido.MidiFile) -> int:
-    for track in mid.tracks:
-        for msg in track:
-            if msg.type == 'set_tempo':
-                return msg.tempo
-    else:
-        return mido.midifiles.midifiles.DEFAULT_TEMPO
+    tempos = [
+        msg.tempo
+        for track in mid.tracks
+        for msg in track
+        if msg.type == 'set_tempo'
+    ]
+    if len(tempos) == 1:
+        return tempos[0]
+    elif len(tempos) > 1:
+        int(input(f"请输入 key add value: {tempos}"))
+    return mido.midifiles.midifiles.DEFAULT_TEMPO
 
 
 def playMidi(file_name: str, m_bpm: int, m_key_add: int, keymap: Dict[int, str]) -> None:
