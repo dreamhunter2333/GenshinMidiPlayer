@@ -65,11 +65,11 @@ def playMidi(file_name: str, m_bpm: int, m_key_add: int, keymap: Dict[int, str])
             pyautogui.sleep(sleep_time)
 
 
-@ click.command()
-@ click.option('--file_name', '-f', 'file_name', required=True, type=str)
-@ click.option('--bpm', '-b', 'bpm', default=0, required=True, type=int)
-@ click.option('--wait_seconds', '-w', 'wait_seconds', default=5, required=True, type=int)
-@ click.option('--keymap_file', '-k', 'keymap_file', default="keymap.json", type=str)
+@click.command()
+@click.option('--file_name', '-f', 'file_name', required=True, type=str)
+@click.option('--bpm', '-b', 'bpm', default=0, required=True, type=int)
+@click.option('--wait_seconds', '-w', 'wait_seconds', default=5, required=True, type=int)
+@click.option('--keymap_file', '-k', 'keymap_file', default="keymap.json", type=str)
 def main(file_name: str, bpm: int, wait_seconds: int, keymap_file: str) -> None:
     _logger.info(
         f"Start file_name={file_name}, bpm={bpm}, wait_seconds={wait_seconds}, keymap_file={keymap_file}"
@@ -99,7 +99,7 @@ def main(file_name: str, bpm: int, wait_seconds: int, keymap_file: str) -> None:
         _logger.info(f"key add values: {key_add}")
         note_add = int(input("请输入 key add value: "))
 
-    _logger.info("5s 后开始播放")
+    _logger.info(f"{wait_seconds} s 后开始播放")
     time.sleep(5)
     playMidi(file_name, bpm, note_add, keymap)
     _logger.info("Done.")
